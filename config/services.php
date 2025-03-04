@@ -38,5 +38,11 @@ return [
         'api_key' => env('DEEPSEEK_API_KEY'),
         'endpoint' => env('DEEPSEEK_ENDPOINT', 'https://api.deepseek.com/v1/completions'),
     ],
+    'google' => [
+        'client_id' => env('GOOGLE_CLIENT_ID'),
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
+    ],
+
 
 ];
