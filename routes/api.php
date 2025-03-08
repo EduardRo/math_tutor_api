@@ -18,3 +18,11 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 Route::get('/auth/{provider}', [AuthController::class, 'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
 
+// Ollama
+
+Route::post('/ollama/chat', function (Request $request, OllamaService $ollamaService) {
+    $prompt = $request->input('prompt');
+    $response = $ollamaService->generateResponse($prompt);
+
+    return response()->json($response);
+});
