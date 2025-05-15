@@ -7,9 +7,11 @@ use App\Http\Controllers\API\OllamaController;
 use App\Http\Controllers\API\AIController;
 use App\Http\Controllers\API\LessonController;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+use App\Http\Controllers\MessageController;
+
+//Route::get('/user', function (Request $request) {
+//    return $request->user();
+//});
 
 
 // Authentication routes
@@ -21,7 +23,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:api'
 Route::get('/auth/{provider}', [AuthController::class, 'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [AuthController::class, 'handleProviderCallback']);
 
-// Ollama
+/* Ollama
 
 Route::post('/ollama/chat', function (Request $request, OllamaService $ollamaService) {
     $prompt = $request->input('prompt');
@@ -29,10 +31,19 @@ Route::post('/ollama/chat', function (Request $request, OllamaService $ollamaSer
 
     return response()->json($response);
 });
+*/
 //---------------------modifications-----------------------
-   // Engagement Processing & Avatar Reaction (using AIController)
-   Route::post('/ai/engagement', [AIController::class, 'processEngagement']);
-   Route::post('/ai/avatar-reaction', [AIController::class, 'getAvatarReaction']);
+// Engagement Processing & Avatar Reaction (using AIController)
+//Route::post('/ai/engagement', [AIController::class, 'processEngagement']);
+//Route::post('/ai/avatar-reaction', [AIController::class, 'getAvatarReaction']);
 
-   // --- Lesson Data Route ---
-   Route::get('/lessons/{lesson}', [LessonController::class, 'show']); // Added show method route
+// --- Lesson Data Route ---
+//Route::get('/lessons/{lesson}', [LessonController::class, 'show']); // Added show method route
+
+
+Route::get('/answer', [MessageController::class, 'answer']);
+
+//Route::post('/ask', [MessageController::class, 'ask']);
+
+//Route::middleware('auth:api')->post('/ask', [MessageController::class, 'ask']);
+Route::post('/ask', [MessageController::class, 'ask']);
